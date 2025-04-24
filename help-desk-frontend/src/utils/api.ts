@@ -1,5 +1,5 @@
 // Base URL of the backend API
-const API_BASE_URL = 'http://localhost:4000/api';
+const API_BASE_URL = 'https://hifi-coding-challenge.onrender.com/api';
 
 // Interface for ticket data
 export interface Ticket {
