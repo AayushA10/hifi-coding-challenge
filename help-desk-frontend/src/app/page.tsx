@@ -23,7 +23,7 @@ export default function Home() {
         throw new Error('Please fill in all fields');
       }
 
-      const result = await ticketApi.createTicket({
+      await ticketApi.createTicket({
         name,
         email,
         description,
@@ -33,8 +33,11 @@ export default function Home() {
       setName('');
       setEmail('');
       setDescription('');
-    } catch (err: any) {
-      setError(err.message || 'Failed to submit ticket. Please try again.');
+    } catch (err: Error | unknown) {
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : 'Failed to submit ticket. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

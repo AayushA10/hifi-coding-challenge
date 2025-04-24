@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
 
 app.use(cors({
   origin: '*',
@@ -47,7 +46,6 @@ app.get('/api/test', (req, res) => {
 
 // Mount routes
 app.use('/api/tickets', ticketRoutes);
-// console.log('Routes mounted:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 
 // Error handling middleware
 app.use(notFound);

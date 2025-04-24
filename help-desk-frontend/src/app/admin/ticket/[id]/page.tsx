@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Layout from '@/components/Layout';
 import { ticketApi, Ticket, TicketResponse } from '@/utils/api';
@@ -19,13 +19,7 @@ export default function TicketDetailPage() {
   const [submitting, setSubmitting] = useState(false);
   const [updateStatus, setUpdateStatus] = useState<'new' | 'in progress' | 'resolved' | ''>('');
   
-  useEffect(() => {
-    if (id) {
-      fetchTicketDetails();
-    }
-  }, [id]);
-  
-  const fetchTicketDetails = async () => {
+  const fetchTicketDetails = useCallback(async () => {
     setLoading(true);
     try {
       const ticketResult = await ticketApi.getTicket(id);
@@ -35,12 +29,18 @@ export default function TicketDetailPage() {
       setResponses(responsesResult.data);
       
       setError('');
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch ticket details');
+    } catch (err: Error | unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch ticket details');
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+  
+  useEffect(() => {
+    if (id) {
+      fetchTicketDetails();
+    }
+  }, [id, fetchTicketDetails]);
   
   const handleAddResponse = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,8 +54,8 @@ export default function TicketDetailPage() {
       await ticketApi.addResponse(id, { message, staffName });
       setMessage('');
       fetchTicketDetails(); // Refresh data
-    } catch (err: any) {
-      setError(err.message || 'Failed to add response');
+    } catch (err: Error | unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to add response');
     } finally {
       setSubmitting(false);
     }
@@ -68,8 +68,8 @@ export default function TicketDetailPage() {
       await ticketApi.updateTicketStatus(id, updateStatus);
       fetchTicketDetails(); // Refresh data
       setUpdateStatus('');
-    } catch (err: any) {
-      setError(err.message || 'Failed to update status');
+    } catch (err: Error | unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to update status');
     }
   };
   
@@ -173,7 +173,7 @@ export default function TicketDetailPage() {
                 <div className="flex">
                   <select
                     value={updateStatus}
-                    onChange={(e) => setUpdateStatus(e.target.value as any)}
+                    onChange={(e) => setUpdateStatus(e.target.value as 'new' | 'in progress' | 'resolved' | '')}
                     className="border rounded-l-md px-3 py-2 flex-grow"
                   >
                     <option value="">Select status...</option>

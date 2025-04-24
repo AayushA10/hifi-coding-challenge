@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import { ticketApi, Ticket } from '@/utils/api';
 import Link from 'next/link';
@@ -11,22 +11,22 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('');
 
-  useEffect(() => {
-    fetchTickets();
-  }, [statusFilter]);
-
-  const fetchTickets = async () => {
+  const fetchTickets = useCallback(async () => {
     setLoading(true);
     try {
       const result = await ticketApi.getTickets(statusFilter);
       setTickets(result.data);
       setError('');
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch tickets');
+    } catch (err: Error | unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch tickets');
     } finally {
       setLoading(false);
     }
-  };
+  }, [statusFilter]);
+
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

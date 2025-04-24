@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Make sure dotenv is configured before using process.env
 dotenv.config();
 
 const connectDB = async (): Promise<void> => {
