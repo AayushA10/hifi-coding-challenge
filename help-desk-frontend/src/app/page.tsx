@@ -60,7 +60,7 @@ export default function Home() {
           </div>
         )}
         
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
           <div>
             <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
               Name
@@ -70,7 +70,7 @@ export default function Home() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               required
             />
           </div>
@@ -84,7 +84,7 @@ export default function Home() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white0"
               required
             />
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={5}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               required
             />
           </div>
@@ -106,8 +106,7 @@ export default function Home() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition
-              ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {isSubmitting ? 'Submitting...' : 'Submit Ticket'}
           </button>
