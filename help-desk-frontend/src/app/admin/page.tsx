@@ -45,16 +45,16 @@ export default function AdminPage() {
     <Layout>
       <div>
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Support Tickets</h1>
+          <h1 className="text-3xl font-bold text-blue-600">Support Tickets</h1>
           <div className="flex items-center space-x-2">
-            <label htmlFor="statusFilter" className="text-gray-700">
+            <label htmlFor="statusFilter" className="text-blue-700">
               Filter by status:
             </label>
             <select
               id="statusFilter"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="border rounded-md px-3 py-1"
+              className="border rounded-md px-3 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All</option>
               <option value="new">New</option>

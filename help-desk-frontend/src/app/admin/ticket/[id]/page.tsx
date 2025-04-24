@@ -116,7 +116,7 @@ export default function TicketDetailPage() {
     <Layout>
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Ticket Details</h1>
+          <h1 className="text-3xl font-bold text-blue-500">Ticket Details</h1>
           <button
             onClick={() => router.push('/admin')}
             className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
@@ -132,7 +132,7 @@ export default function TicketDetailPage() {
         )}
         
         {ticket && (
-          <div className="bg-white shadow rounded-lg p-6 mb-6">
+          <div className="bg-white shadow rounded-lg p-6 mb-6 text-gray-800">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <h2 className="text-sm font-medium text-gray-500">Ticket ID</h2>
@@ -195,7 +195,7 @@ export default function TicketDetailPage() {
         )}
         
         <div className="bg-white shadow rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Add Response</h2>
+          <h2 className="text-xl font-semibold mb-4 text-blue-500">Add Response</h2>
           <form onSubmit={handleAddResponse} className="space-y-4">
             <div>
               <label htmlFor="staffName" className="block text-gray-700 font-medium mb-2">
@@ -206,12 +206,12 @@ export default function TicketDetailPage() {
                 id="staffName"
                 value={staffName}
                 onChange={(e) => setStaffName(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
                 required
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
+              <label htmlFor="message" className="block text-gray-900 font-medium mb-2">
                 Response Message
               </label>
               <textarea
@@ -219,7 +219,7 @@ export default function TicketDetailPage() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
                 required
               />
             </div>
@@ -235,7 +235,7 @@ export default function TicketDetailPage() {
         </div>
         
         <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-blue-500">
             Responses ({responses.length})
           </h2>
           {responses.length === 0 ? (
@@ -248,7 +248,7 @@ export default function TicketDetailPage() {
                   className="border-l-4 border-blue-500 pl-4 py-2"
                 >
                   <div className="flex justify-between items-center mb-2">
-                    <div className="font-medium">{response.staffName}</div>
+                    <div className="font-medium text-purple-800">{response.staffName}</div>
                     <div className="text-sm text-gray-500">
                       {new Date(response.createdAt).toLocaleString()}
                     </div>
