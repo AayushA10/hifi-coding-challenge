@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
+type Props = {
+  params: {
+    id: string;
+  };
+};
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: Props
 ) {
   try {
     const response = await fetch(`${API_BASE_URL}/tickets/${params.id}/responses`);
@@ -22,7 +27,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: Props
 
 
 ) {
